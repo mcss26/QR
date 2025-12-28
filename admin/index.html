@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midnight — Admin Dashboard</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <header class="dashboard-header">
+        <div class="header-content">
+            <div class="brand">
+                <div class="logo-symbol">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 9V15M21 9V15M7 5H17C18.1046 5 19 5.89543 19 7V17C19 18.1046 18.1046 19 17 19H7C5.89543 19 5 18.1046 5 17V7C5 5.89543 5.89543 5 7 5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9 9H10M14 9H15M9 15H15M11 12H13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1>Midnight Dashboard</h1>
+                    <p id="userWelcome">Cargando...</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button id="btnLogout" class="btn-ghost">Cerrar Sesión</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-content">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Total QRs</h3>
+                <p id="totalQrs" class="stat-value">--</p>
+                <span class="stat-label">Emitidos históricamente</span>
+            </div>
+            <div class="stat-card">
+                <h3>Acreditados</h3>
+                <p id="totalAccredited" class="stat-value">--</p>
+                <span class="stat-label">Check-ins exitosos</span>
+            </div>
+            <div class="stat-card">
+                <h3>Pendientes</h3>
+                <p id="totalPending" class="stat-value">--</p>
+                <span class="stat-label">Por acreditar</span>
+            </div>
+        </div>
+
+        <div class="actions-grid">
+            <a href="../generator/index.html" class="action-card">
+                <div class="action-icon">🖨️</div>
+                <div class="action-text">
+                    <h4>Generador de QRs</h4>
+                    <p>Crea lotes de códigos con impresión térmica.</p>
+                </div>
+            </a>
+            <a href="../scanner/index.html" class="action-card">
+                <div class="action-icon">📸</div>
+                <div class="action-text">
+                    <h4>Módulo Acreditador</h4>
+                    <p>Escáner de acceso rápido para staff.</p>
+                </div>
+            </a>
+        </div>
+
+        <section class="recent-activity">
+            <div class="section-header">
+                <h2>Actividad Reciente</h2>
+            </div>
+            <div id="activityList" class="activity-list">
+                <!-- Data will be injected here -->
+                <p class="empty-msg">Cargando actividad...</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="index.js"></script>
+</body>
+</html>

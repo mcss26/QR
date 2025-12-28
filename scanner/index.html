@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Midnight — Acreditador</title>
+    
+    <link rel="stylesheet" href="scanner.css">
+    
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- QR Scanner -->
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <!-- Main JS -->
+    <script src="scanner.js" defer></script>
+</head>
+<body>
+
+
+    <header class="app-header">
+        <div class="header-inner">
+            <div class="user-info">
+                <div class="avatar" id="userAvatar"></div>
+                <div class="details">
+                    <span id="userName" class="name">Staff</span>
+                    <span id="userRole" class="role">Operativo</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <a href="../admin/index.html" id="btnDashboard" class="btn btn-ghost btn-sm hidden">Dashboard</a>
+                <button id="btnLogout" class="btn btn-ghost btn-sm">Cerrar Sesión</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="app-container">
+        <div class="scanner-section">
+            <div id="reader" class="scanner-box"></div>
+            <div class="scanner-overlay">
+                <div class="focus-box"></div>
+            </div>
+        </div>
+
+        <div class="status-section">
+            <div id="statusCard" class="status-card idle">
+                <div class="status-icon"></div>
+                <div class="status-details">
+                    <h3 id="statusTitle">Listo para escanear</h3>
+                    <p id="statusMsg">Apuntá al código QR del cliente.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="manual-section">
+            <button id="btnManualInput" class="btn btn-secondary w-full">Ingreso Manual</button>
+            <div id="manualInputBox" class="field hidden">
+                <input type="text" id="manualCode" placeholder="Código de 8 dígitos">
+                <button id="btnCheckManual" class="btn btn-primary">Validar</button>
+            </div>
+        </div>
+
+        <div class="history-section">
+            <div class="section-header">
+                <h3>Últimos accesos</h3>
+                <span id="checkinCount">0</span>
+            </div>
+            <div id="historyList" class="history-list">
+                <!-- History items will be injected here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Feedback Sounds (Global) -->
+    <audio id="soundSuccess" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
+    <audio id="soundError" src="https://assets.mixkit.co/active_storage/sfx/2573/2573-preview.mp3"></audio>
+
+</body>
+</html>
