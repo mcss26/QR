@@ -1,8 +1,5 @@
-// Supabase Configuration
-const SB_URL = "https://zlhnxrsbdhbmqwlbyqbt.supabase.co";
-const SB_KEY = "sb_publishable_fPAvZGteb6eNrs5jrU1Ejg_jp7etyZe";
-
-const supabase = window.supabase.createClient(SB_URL, SB_KEY);
+// Config is loaded from ../config.js which provides window.supabaseClient
+const supabase = window.supabaseClient;
 
 const loginForm = document.getElementById('loginForm');
 const errorBanner = document.getElementById('errorMessage');

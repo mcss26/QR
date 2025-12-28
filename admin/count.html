@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midnight — Contador de Accesos</title>
+    <link rel="stylesheet" href="count.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <header class="dashboard-header">
+        <div class="header-content">
+            <div class="brand">
+                <a href="index.html" class="back-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                </a>
+                <div>
+                    <h1>Contador de Accesos</h1>
+                    <p>Monitoreo de acreditación en tiempo real</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button id="btnRefresh" class="btn-ghost">Actualizar</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-content">
+        <div class="main-stats">
+            <div class="stat-card large">
+                <div class="stat-info">
+                    <h3>Progreso General</h3>
+                    <div class="progress-container">
+                        <div id="mainProgressBar" class="progress-bar" style="width: 0%"></div>
+                    </div>
+                    <div class="progress-labels">
+                        <span id="progressPercent">0%</span>
+                        <span id="progressRatio">0 / 0</span>
+                    </div>
+                </div>
+                <div id="totalScanned" class="stat-value">--</div>
+            </div>
+        </div>
+
+        <section class="batch-section">
+            <div class="section-header">
+                <h2>Desglose por Lote</h2>
+            </div>
+            <div id="batchList" class="batch-grid">
+                <!-- Batch items will be injected here -->
+                <p class="empty-msg">Cargando datos...</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="../config.js"></script>
+    <script src="count.js"></script>
+</body>
+</html>
