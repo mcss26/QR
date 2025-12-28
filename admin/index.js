@@ -69,7 +69,7 @@ async function loadActivity() {
 }
 
 el('btnLogout').addEventListener('click', async () => {
-    await supabaseClient.auth.signOut();
+    await supabase.auth.signOut();
     window.location.href = '../auth/login.html';
 });
 

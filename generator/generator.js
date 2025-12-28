@@ -165,12 +165,67 @@ function buildAll() {
   return payloads;
 }
 
+async function saveToDatabase(payloads, batchName) {
+  const { data: { session } } = await supabaseClient.auth.getSession();
+  if (!session) throw new Error("No hay sesión activa.");
+
+  // 1. Create Batch
+  const { data: batch, error: bError } = await supabaseClient
+    .from("qr_batches")
+    .insert({
+      name: batchName,
+      created_by: session.user.id
+    })
+    .select()
+    .single();
+
+  if (bError) throw bError;
+
+  // 2. Insert Codes
+  const codesToInsert = payloads.map(code => ({
+    batch_id: batch.id,
+    code: code,
+    status: 'PENDIENTE'
+  }));
+
+  const { error: cError } = await supabaseClient
+    .from("qr_codes")
+    .insert(codesToInsert);
+
+  if (cError) throw cError;
+
+  return batch;
+}
+
 el("btnBack").addEventListener("click", () => history.back());
 el("btnPreview").addEventListener("click", buildAll);
-el("btnPrint").addEventListener("click", () => {
-  buildAll();
-  // Wait for QR codes to render
-  setTimeout(() => window.print(), 200);
+el("btnPrint").addEventListener("click", async () => {
+  const payloads = buildAll();
+  const batchName = (el("batchName").value || "Lote sin nombre").trim();
+  
+  const btn = el("btnPrint");
+  const originalHtml = btn.innerHTML;
+  
+  try {
+    btn.disabled = true;
+    btn.innerHTML = "Guardando...";
+    
+    await saveToDatabase(payloads, batchName);
+    
+    btn.innerHTML = "Imprimiendo...";
+    // Wait for QR codes to render
+    setTimeout(() => {
+        window.print();
+        btn.disabled = false;
+        btn.innerHTML = originalHtml;
+    }, 500);
+    
+  } catch (err) {
+    console.error(err);
+    alert("Error al guardar en la base de datos: " + err.message);
+    btn.disabled = false;
+    btn.innerHTML = originalHtml;
+  }
 });
 
 el("btnClear").addEventListener("click", () => {

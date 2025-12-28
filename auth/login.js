@@ -57,7 +57,7 @@ async function handleRedirection(user) {
     } else if (profile.role === 'OPERATIVO') {
         window.location.href = '../scanner/index.html';
     } else {
-        errorBanner.textContent = "No tienes permisos suficidntes.";
+        errorBanner.textContent = "No tienes permisos suficientes.";
         errorBanner.classList.remove('hidden');
         setLoading(false);
         await supabase.auth.signOut();
